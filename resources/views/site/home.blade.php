@@ -8,7 +8,7 @@
         <div class="col s12 m6 l3" style="max-height:"> 
             <div class="card">
               <div class="card-image">
-                <img src="{{ url("storage/{$produtos->imagem}") }}">
+                <img src="{{url("storage/{$produtos->imagem}")}}">
                 
                 {{-- @can('verProduto', $produto) --}}
                 <a href=" {{ route('site.details', $produtos->slug) }} " class="btn-floating halfway-fab waves-effect waves-light red"><i class="material-icons">visibility</i></a>  

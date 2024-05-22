@@ -37,11 +37,13 @@ class ProdutoController extends Controller
         $produto = $request->all();
 
         if ($request->imagem) {
-            $produto['imagem'] = $request->imagem->store('produtos');
-            $manager = new ImageManager(new Driver());
-            $image = $manager->read('storage/app/public/produtos');
-            $image->resize(width: 300, height:300);
-            $image->save(path:storage_path('storage/app/public/produtos/'));
+            
+            $image = $request->imagem;
+            $manager = new ImageManager(new Driver());   
+            $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension(); 
+            $img = $manager->read($request->file('imagem'));  
+            $img->resize(370,246);
+            $img->toJpeg(80)->save(base_path('storage/app/public/produtos/'.$name_gen));           
         }
 
         $produto['slug'] = Str::slug($request->nome);
